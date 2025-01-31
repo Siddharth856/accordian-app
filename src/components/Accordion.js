@@ -4,7 +4,7 @@ const Accordion = ({ title, questions, isEditable, onComplete }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [answers, setAnswers] = useState(questions.map(() => "No"));
   const [isSaved, setIsSaved] = useState(false);
-  const [hasSelection, setHasSelection] = useState(false); // Track if any radio button has been clicked
+  const [hasSelection, setHasSelection] = useState(false); // Tracking the radio button
 
   const handleAnswerChange = (index, value) => {
     const updatedAnswers = [...answers];
@@ -21,24 +21,24 @@ const Accordion = ({ title, questions, isEditable, onComplete }) => {
     onComplete(allAnsweredYesOrNA);
   };
 
-  const handleCancel = () => {
+  const handleCancel = () => {  // resets answer to "no"
     setIsSaved(false);
     setAnswers(questions.map(() => "No"));
     setHasSelection(false); // Hide Save and Cancel buttons
-    onComplete(false);
+    onComplete(false);  // next accordion ko lock kardiya 
   };
 
   return (
     <div className="accordion">
       <div
         className="accordion-header"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(!isOpen)}    // display karta hai accordion header ko (click to open and close )
         style={{ cursor: "pointer", fontWeight: "bold", padding: "10px", border: "1px solid black", backgroundColor: "#f4f4f4" }}
       >
-        {title} {isOpen ? "▲" : "▼"}
+        {title} {isOpen ? "▲" : "▼"} 
       </div>
 
-      {isOpen && (
+      {isOpen && (               // check if accordion is open 
         <div className="accordion-content" style={{ padding: "10px", border: "1px solid gray" }}>
           {questions.map((question, index) => (
             <div key={index} className="question">
