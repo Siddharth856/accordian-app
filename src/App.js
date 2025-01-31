@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import Accordion from "./Accordion";
-import "./App.css"; // Optional for styling
+import Accordion from "./components/Accordion";
 
 const App = () => {
-  const [editableIndex, setEditableIndex] = useState(0);
+  const [accordionState, setAccordionState] = useState([
+    { title: "Section 1", isEditable: true, isCompleted: false },
+    { title: "Section 2", isEditable: false, isCompleted: false },
+    { title: "Section 3", isEditable: false, isCompleted: false },
+    { title: "Section 4", isEditable: false, isCompleted: false },
+  ]);
 
-  const questions = [
+  const questionsList = [
     [
       "Is the document up to date?",
       "Have all errors been resolved?",
@@ -21,41 +25,49 @@ const App = () => {
       "Has it been tested for performance?",
     ],
     [
-      "Are all APIs documented?",
-      "Is the response structure correct?",
-      "Have error messages been standardized?",
-      "Is the request validation implemented?",
-      "Are rate limits applied?",
+      "Is the API response time optimized?",
+      "Are there redundant API calls?",
+      "Is caching implemented where necessary?",
+      "Are all endpoints secured?",
+      "Is proper error handling in place?",
     ],
     [
-      "Are UI elements aligned?",
-      "Does it work on mobile?",
-      "Have accessibility guidelines been followed?",
-      "Are animations smooth?",
-      "Has cross-browser testing been done?",
+      "Are user roles and permissions correctly set?",
+      "Is the database structure optimized?",
+      "Have the latest patches been applied?",
+      "Has the final deployment checklist been reviewed?",
+      "Is rollback strategy in place?",
     ],
   ];
 
-  const handleAccordionCompletion = (index, isCompleted) => {
+  const handleAccordionComplete = (index, isCompleted) => {
+    const updatedAccordions = [...accordionState];
+    updatedAccordions[index].isCompleted = isCompleted;
+
     if (isCompleted) {
-      setEditableIndex(index + 1);
+      if (index < updatedAccordions.length - 1) {
+        updatedAccordions[index + 1].isEditable = true;
+      }
     } else {
-      setEditableIndex(index);
+      for (let i = index + 1; i < updatedAccordions.length; i++) {
+        updatedAccordions[i].isEditable = false;
+        updatedAccordions[i].isCompleted = false;
+      }
     }
+
+    setAccordionState(updatedAccordions);
   };
 
   return (
-    <div className="App">
+    <div>
       <h1>Dynamic Accordions</h1>
-      {questions.map((qSet, index) => (
+      {accordionState.map((section, index) => (
         <Accordion
           key={index}
-          title={`Section ${index + 1}`}
-          questions={qSet}
-          isEditable={editableIndex === index}
-          onComplete={(isCompleted) =>
-            handleAccordionCompletion(index, isCompleted)
-          }
+          title={section.title}
+          questions={questionsList[index]}
+          isEditable={section.isEditable}
+          onComplete={(isCompleted) => handleAccordionComplete(index, isCompleted)}
         />
       ))}
     </div>
