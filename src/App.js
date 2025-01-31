@@ -3,19 +3,21 @@ import Accordion from "./components/Accordion";
 
 const App = () => {
   const [accordionState, setAccordionState] = useState([
-    { title: "Section 1", isEditable: true, isCompleted: false },
-    { title: "Section 2", isEditable: false, isCompleted: false },
-    { title: "Section 3", isEditable: false, isCompleted: false },
-    { title: "Section 4", isEditable: false, isCompleted: false },
+    { title: "Hotlist", isEditable: true, isCompleted: false },
+    { title: "Buying Platform", isEditable: false, isCompleted: false },
+    { title: "Set 3", isEditable: false, isCompleted: false },
+    { title: "Set 4", isEditable: false, isCompleted: false },
   ]);
 
   const questionsList = [
     [
-      "Is the document up to date?",
-      "Have all errors been resolved?",
-      "Is the format correct?",
-      "Has it been reviewed by the team?",
-      "Are all required sections completed?",
+      "Did you understand the task?",
+      "Have you completed all the steps?",
+      "Did you check for any mistakes?",
+       "Have you followed the instructions properly?",
+       "Is everything working as expected?",
+     "Did you ask for help if needed?",
+
     ],
     [
       "Is the data validated?",
@@ -60,7 +62,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Dynamic Accordions</h1>
+      <h1> Accordions</h1>
       {accordionState.map((section, index) => (
         <Accordion
           key={index}
