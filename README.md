@@ -13,4 +13,4 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-[Watch the video](https://github.com/Siddharth856/accordian-app/blob/main/Screen_Recording.mov)
+[Watch the video](https://github.com/Siddharth856/accordian-app/blob/main/output.mp4)
